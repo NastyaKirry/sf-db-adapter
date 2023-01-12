@@ -1,0 +1,19 @@
+application:
+  swagger:
+    enabled: true
+    title: sf-db-adapter
+    description: sf-db-adapter
+    version: 1.1.1
+server:
+  port: 8084
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sf-db
+    username: postgres
+    password: 12345678
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
