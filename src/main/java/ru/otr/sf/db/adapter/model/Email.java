@@ -29,7 +29,7 @@ public class Email {
         this.user = user;
     }
 
-    public Email(Long id, String email) {
+    public Email(String email) {
         this.email = email;
     }
     public Email() {}

@@ -1,5 +1,6 @@
 package ru.otr.sf.db.adapter.service;
 
+import ru.otr.sf.db.adapter.model.Email;
 import ru.otr.sf.db.adapter.model.User;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface UserService {
 
     List<User> getFindAll();
 
-    User addUsers(String username);
+    User addUsers(User user);
 
     void deleteUsers(Long id);
 

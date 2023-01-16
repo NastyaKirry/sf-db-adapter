@@ -1,7 +1,9 @@
 package ru.otr.sf.db.adapter.service.impl;
 
 import org.springframework.stereotype.Service;
+import ru.otr.sf.db.adapter.model.Email;
 import ru.otr.sf.db.adapter.model.User;
+import ru.otr.sf.db.adapter.repository.EmailRepository;
 import ru.otr.sf.db.adapter.repository.UserRepository;
 import ru.otr.sf.db.adapter.service.UserService;
 
@@ -12,11 +14,13 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, EmailRepository emailRepository) {
         this.userRepository = userRepository;
+        this.emailRepository = emailRepository;
     }
 
     private final UserRepository userRepository;
+    private final EmailRepository emailRepository;
 
     @Override
     public Optional<User> getById(Long id) {
@@ -30,12 +34,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User addUsers(String username) {
-        User user = new User();
-        user.setUsername(username);
-        userRepository.save(user);
+    public User addUsers(User user) {
+        for (Email email:user.getEmails()) {
+            email.setId(null);
+            email.setUser(user);
+        }
+        emailRepository.saveAll(user.getEmails());
+        if (user.getEmails().size()==0) {
+            userRepository.save(user);
+        }
         return user;
     }
+
+
     @Override
     public void deleteUsers(Long id) {
         userRepository.deleteById(id);

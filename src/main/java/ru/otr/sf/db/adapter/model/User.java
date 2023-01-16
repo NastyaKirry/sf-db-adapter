@@ -24,6 +24,10 @@ public class User {
     @JsonManagedReference
     private List<Email> emails = new ArrayList<>();
 
+    public User(String username, List<Email> emails) {
+        this.username = username;
+        this.emails = emails;
+    }
 
     public List<Email> getEmails() {
         return emails;

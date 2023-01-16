@@ -3,9 +3,11 @@ package ru.otr.sf.db.adapter.controller;
 
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;
+import ru.otr.sf.db.adapter.dto.UserDto;
 import ru.otr.sf.db.adapter.model.User;
 import ru.otr.sf.db.adapter.service.EmailService;
 import ru.otr.sf.db.adapter.service.UserService;
+import ru.otr.sf.db.adapter.utils.MapperUser;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,11 +17,15 @@ import java.util.Optional;
 @RequestMapping("/api/v20/")
 public class SfDbController {
 
-    public SfDbController(UserService userService, EmailService emailService) {
+    public SfDbController(UserService userService, EmailService emailService, MapperUser mapperUser) {
         this.userService = userService;
+        this.emailService = emailService;
+        this.mapperUser = mapperUser;
     }
 
     private final UserService userService;
+    private final EmailService emailService;
+    private final MapperUser mapperUser;
 
     @ApiOperation("Модель all")
     @GetMapping("/all")
@@ -35,8 +41,8 @@ public class SfDbController {
 
     @ApiOperation("Модель ")
     @PostMapping("/create")
-    public User addUsers(@RequestParam String username) {
-        return userService.addUsers(username);
+    public User addUsers(@RequestBody UserDto userDTO){//(@RequestParam String username) {
+        return userService.addUsers(mapperUser.DtoToUser(userDTO));
     }
 
     @ApiOperation("Удаление")
