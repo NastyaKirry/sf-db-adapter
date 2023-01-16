@@ -40,8 +40,8 @@ public class SfDbController {
     }
 
     @ApiOperation("Удаление")
-    @DeleteMapping("//delete/{id}")
-    public void delete(@PathVariable long id){
+    @DeleteMapping("/delete/{id}")
+    public void delete(@PathVariable Long id){
         userService.deleteUsers(id);
     }
     @ApiOperation("Search Username")
