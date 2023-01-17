@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> getById(Long id) {
         Optional<User> users = userRepository.findById(id);
+        //users.isPresent()
         return users;
     }
 
@@ -38,11 +39,9 @@ public class UserServiceImpl implements UserService {
         for (Email email:user.getEmails()) {
             email.setId(null);
             email.setUser(user);
+            emailRepository.save(email);
         }
-        emailRepository.saveAll(user.getEmails());
-        if (user.getEmails().size()==0) {
             userRepository.save(user);
-        }
         return user;
     }
 

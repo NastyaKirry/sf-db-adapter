@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Api(tags = {"sf-db-adapter"})
 @RestController
-@RequestMapping("/api/v20/")
+@RequestMapping("/api/v20/user")
 public class SfDbController {
 
     public SfDbController(UserService userService, EmailService emailService, MapperUser mapperUser) {
@@ -27,22 +27,22 @@ public class SfDbController {
     private final EmailService emailService;
     private final MapperUser mapperUser;
 
-    @ApiOperation("Модель all")
-    @GetMapping("/all")
+    @ApiOperation("Вывести всех пользователей")
+    @GetMapping("/getAllUser")
     public List<User> getAllUser() {
         return userService.getFindAll();
     }
 
-    @ApiOperation("Модель ")
-    @GetMapping("/user")
+    @ApiOperation("Поиск user ")
+    @GetMapping("/getUser/{id}")
     public Optional<User> getUser(@RequestParam Long id) {
         return  userService.getById(id);
     }
 
-    @ApiOperation("Модель ")
-    @PostMapping("/create")
+    @ApiOperation("Добавить user ")
+    @PostMapping("/addUsers")
     public User addUsers(@RequestBody UserDto userDTO){//(@RequestParam String username) {
-        return userService.addUsers(mapperUser.DtoToUser(userDTO));
+        return userService.addUsers(mapperUser.dtoToUser(userDTO));
     }
 
     @ApiOperation("Удаление")
@@ -50,8 +50,8 @@ public class SfDbController {
     public void delete(@PathVariable Long id){
         userService.deleteUsers(id);
     }
-    @ApiOperation("Search Username")
-    @GetMapping("/Search/{username}")
+    @ApiOperation("Поиск user")
+    @GetMapping("/search/{username}")
     public List<User>  getSearchById(@PathVariable String username) {
         return userService.searchUsers(username);
     }

@@ -24,13 +24,13 @@ public class EmailController {
     private final UserService userService;
 
     @ApiOperation("Модель all")
-    @GetMapping("/all/email")
+    @GetMapping("/all/getAllEmail")
     public List<Email> getAllEmail() {
         return emailService.getFindAll();
     }
 
     @ApiOperation("EmailAdd ")
-    @PostMapping("/create")
+    @PostMapping("/addEmail")
     public Email addEmail(@RequestParam String email, @RequestParam Long idUser) {
         return emailService.addEmail(email, idUser);
     }

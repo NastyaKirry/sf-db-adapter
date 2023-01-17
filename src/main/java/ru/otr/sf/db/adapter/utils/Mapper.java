@@ -10,8 +10,8 @@ import ru.otr.sf.db.adapter.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
-class MapperUserImpl implements MapperUser {
+//класс больше не используется. используется mapstruct
+class Mapper { //implements MapperUser {
 
     public UserDto userToDto(User user) {
         List<Email> emails = user.getEmails();
