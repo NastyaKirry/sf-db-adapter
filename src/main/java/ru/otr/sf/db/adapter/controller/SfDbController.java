@@ -2,7 +2,6 @@ package ru.otr.sf.db.adapter.controller;
 
 
 import io.swagger.annotations.*;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.otr.sf.db.adapter.dto.UserDto;
 import ru.otr.sf.db.adapter.model.User;
@@ -29,7 +28,6 @@ public class SfDbController {
     private final MapperUser mapperUser;
 
     @ApiOperation("Вывести всех пользователей")
-    @PreAuthorize("hasRole('USER')")
     @GetMapping("/getAllUser")
     public List<User> getAllUser() {
         return userService.getFindAll();
